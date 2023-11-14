@@ -112,3 +112,56 @@ main {
 		}
 	}
 }
+
+@media screen and (max-width: 1600px) {
+	main {
+		figure {
+			transform-origin: right center;
+			transform: scale(0.8);
+			right: -15vw;
+		}
+	}
+}
+
+@media screen and (max-width: 1400px) {
+	main {
+		article {
+			width: 38vw;
+			top: 60vh;
+		}
+		figure {
+			transform: scale(0.75);
+		}
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	main {
+		nav {
+			width: 100%;
+			padding: 5vh 10vw;
+		}
+		article {
+			width: 100%;
+			top: 10vh;
+			left: 0;
+			padding: 10vw;
+		}
+		figure {
+			transform: scale(0.7);
+		}
+	}
+}
+
+@media screen and (max-width: 800px) {
+	main {
+		article {
+			width: 100%;
+			top: 18vh;
+		}
+		figure {
+			transform: scale(0.6);
+			right: -20vw;
+		}
+	}
+}
