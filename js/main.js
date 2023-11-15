@@ -4,13 +4,20 @@ const em = screen.querySelector('em');
 const numbers = screen.querySelectorAll('span'); // 배열
 const txt = screen.querySelectorAll('em'); // em 두개 해서 am/pm 오전 오후 바뀌게 해보기
 
-setInterval(() => {
-	changeTheme();
-	em.innerText = new Date().getHours() < 12 ? 'am' : 'pm';
+// 자주 바뀔만한 값을 전역변수 형태로 객체를 배열로 묶어두는 형태로 따로 빼서 관리
+// 해당 값이 아래 함수에서 호출되도록 처리
+// const hr = new Date().getHours(); 이거 왜 안대?
+const data = [
+	{ cond: new Date().getHours() >= 5 && new Date().getHours() < 10, name: 'morning' },
+	{ cond: new Date().getHours() >= 12 && new Date().getHours() < 16, name: 'afeternoon' },
+	{ cond: new Date().getHours() >= 16 && new Date().getHours() < 20, name: 'evening' },
+	{ cond: new Date().getHours() >= 20 || new Date().getHours() < 5, name: 'night' },
+];
 
-	//getTime함수가 [시간,분,초]반환
-	//반환된 배열값을 그대로 반복돌면서 setTime함수에 인수로 전달
-	//setTime반복돌면서 시간,분,초에 1자리수일때 앞에 '0'을 붙여주는 공통로직 반복처리
+setInterval(() => {
+	//data전역변수를 인수로 받아서 호출처리 (파라미터화)
+	changeTheme(data);
+	em.innerText = new Date().getHours() < 12 ? 'am' : 'pm';
 	getTime().forEach((num, idx) => setTime(num, idx));
 }, 1000);
 
@@ -38,38 +45,20 @@ function setTime(num, idx) {
 }
 
 //시간에 따른 테마 변경함수
-function changeTheme() {
-	// 배열로 담으면 어때?
-	const hr = new Date().getHours();
-	//빈 문자열로 초기화 시켜서 중첩 안되게, 적용됬던 class 초기화 후 조건식에 적용된 class 적용
+function changeTheme(info) {
+	// const hr = new Date().getHours();
+	//전역 data를 바로 활용하는 것이 아닌 info라는 파라미터를 통해서 전달받도록 처리
 	main.className = '';
-	//조건식을 배열이나 객체로 묶어서 처리하기
-	// 조건식 (객체), 문자값(객체)
-	const data = [
-		{ cond: hr >= 5 && hr < 10, name: 'morning' },
-		{ cond: hr >= 12 && hr < 16, name: 'afeternoon' },
-		{ cond: hr >= 16 && hr < 20, name: 'evening' },
-		{ cond: hr >= 20 || hr < 5, name: 'night' },
-	];
 
 	data.forEach((el) => {
-		//배열의 객체
 		if (el.cond) main.classList.add(el.name);
 	});
 	/*
-  const shareTime = ['hr >= 5 && hr < 10', 'hr >= 12 && hr < 16', 'hr >= 16 && hr < 20', 'hr >= 20 || hr < 5'];
-	const changeClass = ['morning', 'afternoon', 'evening', 'night'];
-	if (hr >= 5 && hr < 10) {
-		main.classList.add('morning');
-	}
-	if (hr >= 12 && hr < 16) {
-		main.classList.add('afeternoon');
-	}
-	if (hr >= 16 && hr < 20) {
-		main.classList.add('evening');
-	}
-	if (hr >= 20 || hr < 5) {
-		main.classList.add('night');
-	}
+  const changeData = [
+    {time : hr >= 5 && hr < 10, value : 'morning'},
+    {time : hr >= 12 && hr < 16, value : 'afternoon'},
+    {time : hr >= 16 && hr < 20, value : 'evening'},
+    {time : hr >= 20 || hr < 5, value : 'night'}
+  ]
   */
 }
