@@ -45,7 +45,7 @@ function setTime(num, idx) {
 }
 
 //시간에 따른 테마 변경함수
-function changeTheme(info) {
+function changeTheme(data) {
 	// const hr = new Date().getHours();
 	//전역 data를 바로 활용하는 것이 아닌 info라는 파라미터를 통해서 전달받도록 처리
 	main.className = '';
