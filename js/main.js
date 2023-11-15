@@ -1,14 +1,16 @@
+const main = document.querySelector('main');
 const screen = document.querySelector('.screen');
 const em = screen.querySelector('em');
 const numbers = screen.querySelectorAll('span'); // 배열
-const txt = screen.querySelectorAll('em'); // em 두개 해서 am/pm 오전 오후 배뀌게 해보기
+const txt = screen.querySelectorAll('em'); // em 두개 해서 am/pm 오전 오후 바뀌게 해보기
 
 setInterval(() => {
+	changeTheme();
 	em.innerText = new Date().getHours() < 12 ? 'am' : 'pm';
+
 	//getTime함수가 [시간,분,초]반환
 	//반환된 배열값을 그대로 반복돌면서 setTime함수에 인수로 전달
 	//setTime반복돌면서 시간,분,초에 1자리수일때 앞에 '0'을 붙여주는 공통로직 반복처리
-
 	getTime().forEach((num, idx) => setTime(num, idx));
 }, 1000);
 
@@ -33,4 +35,25 @@ function getTime() {
 //반환된 시간값을 인수로 받아서 DOM에 세팅하는 함수
 function setTime(num, idx) {
 	numbers[idx].innerText = num < 10 ? '0' + num : num;
+}
+
+//시간에 따른 테마 변경함수
+function changeTheme() {
+	// 배열로 담으면 어때?
+	const hr = new Date().getHours();
+	//빈 문자열로 초기화 시켜서 중첩 안되게
+	main.className = '';
+
+	if (hr >= 5 && hr < 10) {
+		main.classList.add('morning');
+	}
+	if (hr >= 12 && hr < 16) {
+		main.classList.add('afeternoon');
+	}
+	if (hr >= 16 && hr < 20) {
+		main.classList.add('evening');
+	}
+	if (hr >= 20 || hr < 5) {
+		main.classList.add('night');
+	}
 }
