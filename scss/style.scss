@@ -160,7 +160,66 @@ main {
 				width: 90px;
 				text-align: center;
 			}
+
+			.none {
+				border: 1px solid red;
+				position: relative;
+				display: none;
+
+				em {
+					position: absolute;
+				}
+			}
 		}
+	}
+}
+//morning
+main.morning {
+	background-image: url(../img/bg_morning.jpg);
+
+	figure {
+		background-image: url(../img/phone_morning.png);
+	}
+}
+
+//afternoon
+main.afternoon {
+	background-image: url(../img/bg_afternoon.jpg);
+	article {
+		color: #555;
+		& * {
+			color: #555;
+		}
+	}
+	figure {
+		color: #555;
+		background-image: url(../img/phone_afternoon.png);
+
+		.screen {
+			color: #555;
+		}
+	}
+}
+
+//evenig
+main.evening {
+	background-image: url(../img/bg_evening.jpg);
+
+	figure {
+		background-image: url(../img/phone_evening.png);
+	}
+}
+
+//night
+main.night {
+	background-image: url(../img/bg_night.jpg);
+
+	nav {
+		color: #fff;
+	}
+
+	figure {
+		background-image: url(../img/phone_night.png);
 	}
 }
 

@@ -1,6 +1,7 @@
 const screen = document.querySelector('.screen');
 const em = screen.querySelector('em');
 const numbers = screen.querySelectorAll('span'); // 배열
+const txt = screen.querySelectorAll('em'); // em 두개 해서 am/pm 오전 오후 배뀌게 해보기
 
 setInterval(() => {
 	em.innerText = new Date().getHours() < 12 ? 'am' : 'pm';

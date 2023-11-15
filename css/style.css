@@ -144,6 +144,41 @@ main {
       main figure .screen span {
         width: 90px;
         text-align: center; }
+      main figure .screen .none {
+        border: 1px solid red;
+        position: relative;
+        display: none; }
+        main figure .screen .none em {
+          position: absolute; }
+
+main.morning {
+  background-image: url(../img/bg_morning.jpg); }
+  main.morning figure {
+    background-image: url(../img/phone_morning.png); }
+
+main.afternoon {
+  background-image: url(../img/bg_afternoon.jpg); }
+  main.afternoon article {
+    color: #555; }
+    main.afternoon article * {
+      color: #555; }
+  main.afternoon figure {
+    color: #555;
+    background-image: url(../img/phone_afternoon.png); }
+    main.afternoon figure .screen {
+      color: #555; }
+
+main.evening {
+  background-image: url(../img/bg_evening.jpg); }
+  main.evening figure {
+    background-image: url(../img/phone_evening.png); }
+
+main.night {
+  background-image: url(../img/bg_night.jpg); }
+  main.night nav {
+    color: #fff; }
+  main.night figure {
+    background-image: url(../img/phone_night.png); }
 
 @media screen and (max-width: 1600px) {
   main figure {
