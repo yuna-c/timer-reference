@@ -41,9 +41,24 @@ function setTime(num, idx) {
 function changeTheme() {
 	// 배열로 담으면 어때?
 	const hr = new Date().getHours();
-	//빈 문자열로 초기화 시켜서 중첩 안되게
+	//빈 문자열로 초기화 시켜서 중첩 안되게, 적용됬던 class 초기화 후 조건식에 적용된 class 적용
 	main.className = '';
+	//조건식을 배열이나 객체로 묶어서 처리하기
+	// 조건식 (객체), 문자값(객체)
+	const data = [
+		{ cond: hr >= 5 && hr < 10, name: 'morning' },
+		{ cond: hr >= 12 && hr < 16, name: 'afeternoon' },
+		{ cond: hr >= 16 && hr < 20, name: 'evening' },
+		{ cond: hr >= 20 || hr < 5, name: 'night' },
+	];
 
+	data.forEach((el) => {
+		//배열의 객체
+		if (el.cond) main.classList.add(el.name);
+	});
+	/*
+  const shareTime = ['hr >= 5 && hr < 10', 'hr >= 12 && hr < 16', 'hr >= 16 && hr < 20', 'hr >= 20 || hr < 5'];
+	const changeClass = ['morning', 'afternoon', 'evening', 'night'];
 	if (hr >= 5 && hr < 10) {
 		main.classList.add('morning');
 	}
@@ -56,4 +71,5 @@ function changeTheme() {
 	if (hr >= 20 || hr < 5) {
 		main.classList.add('night');
 	}
+  */
 }
