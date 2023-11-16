@@ -3,6 +3,8 @@ const screen = document.querySelector('.screen');
 const em = screen.querySelector('em');
 const numbers = screen.querySelectorAll('span'); // 배열
 const txt = screen.querySelectorAll('em'); // em 두개 해서 am/pm 오전 오후 바뀌게 해보기
+const btns = main.querySelectorAll('nav span');
+console.log(btns);
 
 // 자주 바뀔만한 값을 전역변수 형태로 객체를 배열로 묶어두는 형태로 따로 빼서 관리
 // 해당 값이 아래 함수에서 호출되도록 처리
@@ -14,12 +16,27 @@ const data = [
 	{ cond: new Date().getHours() >= 20 || new Date().getHours() < 5, name: 'night' },
 ];
 
-setInterval(() => {
+let timer = setInterval(() => {
 	//data전역변수를 인수로 받아서 호출처리 (파라미터화)
 	changeTheme(data);
 	em.innerText = new Date().getHours() < 12 ? 'am' : 'pm';
 	getTime().forEach((num, idx) => setTime(num, idx));
 }, 1000);
+
+btns.forEach((btn) => {
+	//각 버튼 클릭시
+	btn.addEventListener('click', (e) => {
+		//클릭한 버튼만 활성화
+		btns.forEach((btn) => btn.classList.remove('on'));
+		e.currentTarget.classList.add('on');
+		// 기존 자동롤링기능 끊어줌
+		clearInterval(timer);
+		//메인 요소의 모든 클래스 제거
+		main.className = '';
+		// 클릭한 버튼의 글자를 가져와서 소문자로 변경한 다음 메인 요소의 클래스명으로 지정
+		main.classList.add(e.currentTarget.innerText.toLowerCase());
+	});
+});
 
 //시간값을 구해서 반환하는 함수
 function getTime() {
@@ -42,6 +59,8 @@ function getTime() {
 //반환된 시간값을 인수로 받아서 DOM에 세팅하는 함수
 function setTime(num, idx) {
 	numbers[idx].innerText = num < 10 ? '0' + num : num;
+	// numbers도 파라미터로 받는게 맞음 (잘못 들어갔을 경우)
+	// 호출 될 때//
 }
 
 //시간에 따른 테마 변경함수
@@ -62,3 +81,5 @@ function changeTheme(data) {
   ]
   */
 }
+
+//clearinterver
